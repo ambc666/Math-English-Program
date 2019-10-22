@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Introduction to Developing Software</title>
+	<meta charset="utf-8" />
+<script>
+    //Craig Rodgers
+    //SQA Introduction to Developing Software
+    //This is a program that has 2 departments, English and Maths.  The program will run and ask for a name which it uses to welcome the user and has a prompt box to run the program.  The English department will ask to enter a number and it will give a corresponding letter for the number entered.  The maths program asks for 2 numbers which is adds together to give a total.  The user is given a third option to be able to exit the program.
+    //February 2018
+    var name = prompt("Please enter your full name"); //Just the prompt box.
+    var newName = name.split(" ", 1); //This splits the name so only the first name entered counts.
+    var finalName = newName[0].charAt(0).toUpperCase() + newName[0].slice(1).toLowerCase(); //This makes anything put in go OCD with Uppercase_Lowercase eg.type craig and it shows as Craig.
+    document.write("<h2>Welcome " + finalName + "</h2>"); 
+    function choice() {
+        do {
+            var userDepChoice = prompt("Please enter your choice here:");
+            switch (userDepChoice.toUpperCase()) { //This takes away the case sensitive when picking department.
+                case "ENG":
+                    englishDept();
+                    break;
+                case "MTH":
+                    mathDept();
+                    break;
+                case "EXT":
+                    alert("The program will now close");
+                    break;
+                default:
+                    alert("Please enter only one of the available choices");//This is a switch that is asking for one of the 3 options to be entered to use the program.
+            }
+        } while (userDepChoice.toUpperCase() != "EXT"); //This allows the program to close without being case sensitive.
+    }
+    function englishDept() {
+        var alpha = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]  // This is the array of each letter separately.
+        alert("Welcome " + finalName + " to the English Department");
+        var alphaNum = parseInt(prompt("Please enter a number between 1 and 26"));
+        if (alphaNum < 1 || alphaNum > 26){ //This is so the array starts from 1 to 26 and doesnt allow any number outwith this.
+            alert("The number entered needs to be between 1 and 26, please try again");
+            englishDept();
+        } else if (isNaN(alphaNum)) { //This is Not a Number entered error
+            alert("You didnt enter a number, please only enter a number between 1 and 26");
+            englishDept();
+        } else {
+            alert("The number you entered equals " + alpha[alphaNum - 1]); //The number entered = the corresponding letter above (1=a, 2=b, 26=z etc..).
+        }
+    }
+    function mathDept() {
+        alert("Welcome " + finalName + " to the Maths Department");
+        var num1 = parseInt(prompt("Please enter first number:")); //Enter 1st number prompt.
+        var num2 = parseInt(prompt("Please enter second number:")); //Enter 2nd number prompt.
+        if (isNaN(num1) || isNaN(num2)) { //This is so only a number can be entered, anything other than a number is rejected.
+            alert("You have not entered numbers, please try again"); //This is just my error message.
+            mathDept();
+        } else {
+            function calculateNums() {
+                var numTotal = num1 + num2; //This is adding both numbers together.
+                alert("The total of the 2 numbers entered is " + numTotal); //This is displaying the result of the num1+num2.
+            }
+            calculateNums();
+        }
+    }
+</script>
+</head>
+<body>
+    <h1>Introduction to Developing Software Assessment</h1>
+    <p>To start the menu click on the button</p>
+    <p>Make your choice from the displayed menu options</p>
+    <p><b>Enter ENG to access the English Department</b></p>
+    <p><b>Enter MTH to access the Maths Department</b></p>
+    <p>Enter EXT to stop the program</p>
+    <input type="button" onclick="choice()" value="Begin Program" /> <!--This is just my button to launch the JS program-->
+</body>
+</html>
